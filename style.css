@@ -1,0 +1,175 @@
+/* MÉTODOS DE ALINHAMENTO
+
+1 - DISPLAY FLEX + ALIGN-ITEMS E JUSTIFY-CONTENT;
+2 - DISPLAY BLOCK + MARGIN AUTO;
+3 - EM CASO DE INLINE, APLICAR A CENTRALIZAÇÃO NO ELEMENTO PAI;
+4 - BACKGROUND UTILIZA O "CENTER";
+5 - PARA TEXTO, UTILIZA O "TEXT-ALIGN";
+6 - POSITION ABSLUTE COM TRANSFORM E TOP, RIGHT, BOTTOM E LEFT.
+
+*/
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --text-color: white;
+  --bg-url: url(./assets/bg-mobile.jpg);
+  --stroke-color: rgba(255, 255, 255, 0.5);
+  --surface-color: rgba(255, 255, 255, 0.05);
+  --surface-color-hover: rgba(0, 0, 0, 0.02);
+  --highlight-color: rgba(255, 255, 255, 0.2);
+  --switch-bg-url: url(./assets/moon-stars.svg);
+}
+
+.light {
+  --text-color: black;
+  --bg-url: url(./assets/bg-mobile-light.jpg);
+  --stroke-color: rgba(0, 0, 0, 0.5);
+  --surface-color: rgba(0, 0, 0, 0.05);
+  --surface-color-hover: rgba(0, 0, 0, 0.02);
+  --highlight-color: rgba(0, 0, 0, 0.1);
+  --switch-bg-url: url(./assets/sun.svg);
+}
+
+body {
+  /*  
+  background-image: url(./assets/bg-mobile.jpg); URL DA IMAGEM
+  background-repeat: no-repeat; REPETIÇÃO DA IMAGEM 
+  background-position: center top; REPETIÇÃO DA IMAGEM (2 VALORES: EIXO X / EIXO Y)
+  background-size: cover; COBERTURA DA IMAGEM 
+  */
+
+  /* SHORTHAND DO BACKGROUND (COLOR, URL, REPEAT, POSITION/SIZE */
+  background: var(--bg-url) no-repeat center top/cover;
+}
+
+body * {
+  font-family: "Inter", sans-serif;
+  color: var(--text-color);
+}
+
+#container {
+  width: 360px;
+  height: 712px;
+  margin: 56px auto 0px; /* CENTRALIZAR CAIXAS COM LARGURAS FIXAS (FUNCIONA SOMENTE COM DISPLAY BLOCK) */
+  padding: 0 24px;
+}
+
+/* PROFILE */
+#profile {
+  text-align: center;
+  padding: 24px;
+  /* ALTERNATIVA PARA ALINHAR ELEMENTOS INLINE É PEGAR O "PAI" E APLICAR COMO OS ELEMENTOS DEVEM SE COMPORTAR */
+}
+
+#profile img {
+  width: 112px; /* GERALMENTE NÃO SE ALTERA A ALTURA, POIS ELA ACOMPANHA O TAMANHO DA PÁGINA */
+  /* margin: auto; NÃO FUNCIONA, POIS ELEMENTOS INLINE NÃO ACEITAM MARGIN AUTO. DEVE-SE, PORTANTO, TORNÁ-LO DISPLAY: BLOCK */
+}
+
+#profile p {
+  font-weight: 500;
+  line-height: 24px;
+  margin-top: 8px;
+}
+
+/* SWITCH */
+
+#switch {
+  position: relative; /* ELE IRÁ RELATIVIZAR OS SEUS FILHOS DENTRO DA SUA POSIÇÃO, POR EXEMPLO, O ABSOLUTE DO BUTTON */
+  width: 64px;
+  margin: 4px auto;
+}
+
+#switch button {
+  width: 32px;
+  height: 32px;
+  background: white var(--switch-bg-url) no-repeat center;
+  border: 0;
+  border-radius: 50%;
+  position: absolute; /* USADO PARA SOBREPOR ELEMENTOS E HABILITA AS AÇÕES TOP, RIGHT, BOTTOM E LEFT */
+  top: 50%;
+  left: 0;
+  z-index: 1; /* HABILITA EM QUAL "ANDAR" DO PRÉDIO O ELEMENTO ABSOLUTO ESTARÁ */
+  transform: translateY(-50%);
+}
+
+.light #switch button {
+  right: 0;
+  left: initial;
+}
+
+#switch span {
+  /* DISPLAY INLINE NÃO ACEITA ALGUMAS PROPRIEDADES (EX.: WIDHT E HEIGHT), PORTANTO, APLICA-SE O DISPLAY BLOCK: */
+  display: block;
+  width: 64px;
+  height: 24px;
+  background: var(--surface-color);
+  border: 1px solid var(--stroke-color);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  border-radius: 9999px;
+}
+
+/* LINKS */
+
+ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 24px 0;
+}
+
+ul li a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 16px 24px;
+  background: var(--surface-color);
+  border: 1px solid var(--stroke-color);
+  border-radius: 8px;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  text-decoration: none;
+  font-weight: 500;
+  transition: background 0.2s;
+}
+
+/* PSEUDO ELEMENTO */
+ul li a:hover {
+  background: var(--surface-color-hover);
+  border: 1px solid var(--text-color);
+}
+
+/* SOCIAL LINKS */
+#social-links {
+  display: flex;
+  justify-content: center;
+  padding: 24px 0;
+  font-size: 24px;
+}
+
+#social-links a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  transition: background 0.2s;
+  border-radius: 50%;
+}
+
+#social-links a:hover {
+  background: var(--highlight-color);
+  padding: 16px;
+}
+
+footer {
+  padding: 24px 0;
+  text-align: center;
+  font-size: 14px;
+}
